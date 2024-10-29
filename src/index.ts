@@ -20,7 +20,9 @@ app.post('/', async (c) => {
     },
   );
 
-  return c.text('Fal abort issue')
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  return c.text('ok ')
 })
 
 export default {

@@ -4,8 +4,8 @@
     "dev": "bun run --hot src/index.ts"
   },
   "dependencies": {
-    "@fal-ai/client": "1.0.2",
-    "hono": "4.6.7"
+    "@fal-ai/client": "1.0.3",
+    "hono": "4.6.8"
   },
   "devDependencies": {
     "@types/bun": "1.1.12"
