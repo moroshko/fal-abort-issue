@@ -10,16 +10,18 @@ To reproduce:
 The expected behavior is for the first fal stream request to be aborted and second one to start without throwing an error. Currently, it throws:
 
 ```
-13 | exports.defaultResponseHandler = defaultResponseHandler;
-14 | exports.resultResponseHandler = resultResponseHandler;
-15 | const REQUEST_ID_HEADER = "x-fal-request-id";
-16 | class ApiError extends Error {
-17 |     constructor({ message, status, body }) {
-18 |         super(message);
-             ^
-ApiError: The operation was aborted.
-      at new ApiError (/Users/moroshko/temp/fal-abort-issue/node_modules/@fal-ai/client/src/response.js:18:9)
-      at /Users/moroshko/temp/fal-abort-issue/node_modules/@fal-ai/client/src/streaming.js:171:19
-      at /Users/moroshko/temp/fal-abort-issue/node_modules/@fal-ai/client/src/streaming.js:85:22
-      at rejected (/Users/moroshko/temp/fal-abort-issue/node_modules/@fal-ai/client/src/streaming.js:6:57)
+208 |         this.done = () => __awaiter(this, void 0, void 0, function* () { return this.donePromise; });
+209 |         /**
+210 |          * Aborts the streaming request.
+211 |          */
+212 |         this.abort = () => {
+213 |             this.abortController.abort();
+                                       ^
+AbortError: The operation was aborted.
+ code: "ABORT_ERR"
+
+      at /Users/moroshko/temp/fal-abort-issue/node_modules/@fal-ai/client/src/streaming.js:213:34
+      at /Users/moroshko/temp/fal-abort-issue/src/index.ts:14:14
+      at /Users/moroshko/temp/fal-abort-issue/src/index.ts:13:22
+      at dispatch (/Users/moroshko/temp/fal-abort-issue/node_modules/hono/dist/hono-base.js:187:36)
 ```
